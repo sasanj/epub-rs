@@ -36,7 +36,7 @@ fn doc_open() {
 
     {
         let cover = doc.get_cover_id();
-        assert_eq!(cover.unwrap(), "portada.png");
+        assert_eq!(cover, "portada.png");
     }
 
     {
@@ -72,7 +72,7 @@ fn toc_test() {
     assert!(doc.is_ok());
     let doc = doc.unwrap();
 
-    assert!(doc.toc.len() > 0);
+    assert!(!doc.toc.is_empty());
     for nav in doc.toc.iter() {
         let chapter = doc.resource_uri_to_chapter(&nav.content);
         assert!(chapter.is_some());

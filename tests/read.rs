@@ -19,15 +19,15 @@ fn read_doc() {
         for (k, v) in doc.resources.iter() {
             println!("{}: {}\n * {}\n", k, v.1, v.0.display());
         }
-        println!("");
+        println!();
     }
 
-    while let Ok(_) = doc.go_next() {
+    while doc.go_next() {
         println!("ID: {}", doc.get_current_id().unwrap());
         let current = doc.get_current_str();
         match current {
-            Ok(v) => println!("Value {:?}\n", v),
-            Err(e) => println!("Text Err {:?}\n", e),
+            Some((v, m)) => println!("Value {:?}, Mime {:?}\n", v, m),
+            None => println!("Not Found\n"),
         }
     }
 }
